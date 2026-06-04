@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>愛情機率的神秘策略</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght=300;400;500;700;900&family=Playfair+Display:ital,wght=0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8 0%, #f3e8ff 50%, #fae8ff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 浪漫漂浮愛心背景 */
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .floating-heart {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(244, 63, 94, 0.15);
+            animation: floatUp 20s linear infinite;
+            bottom: -150px;
+            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg) scale(0.6);
+                opacity: 0;
+            }
+        }
+
+        /* 自訂漸層與卡片陰影 */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px 0 rgba(244, 63, 94, 0.06);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #e11d48 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #fda4af 0%, #f472b6 50%, #c084fc 100%);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #d946ef 100%);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.4);
+        }
+
+        /* 美化滾動條 */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(243, 232, 255, 0.5);
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #fda4af;
+            border-radius: 10px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #f43f5e;
+        }
+
+        /* 呼吸特效 */
+        @keyframes pulse-light {
+            0%, 100% { box-shadow: 0 0 15px rgba(244, 63, 94, 0.2); }
+            50% { box-shadow: 0 0 30px rgba(244, 63, 94, 0.6); }
+        }
+
+        .pulse-card {
+            animation: pulse-light 3s infinite;
+        }
+    </style>
+</head>
+<body class="py-8 px-4 sm:px-6 lg:px-8 relative z-10">
+
+    <!-- 漂浮愛心容器 -->
+    <div class="hearts-container" id="heartsContainer"></div>
+
+    <div class="max-w-5xl mx-auto space-y-8 relative z-10">
+
+        <!-- ================= 一、首頁標題區 ================= -->
+        <header class="text-center space-y-4 py-6">
+            <div class="inline-flex items-center justify-center bg-rose-50 text-rose-600 px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide border border-rose-100 shadow-sm mb-2">
+                <span>❤️ 探索愛情與數學的交界</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
+                <span class="gradient-text font-black">愛情機率的神秘策略</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-purple-800 font-medium italic">
+                「在未知的相遇中，測試你的選擇策略」
+            </p>
+            <div class="max-w-2xl mx-auto text-gray-600 text-sm sm:text-base leading-relaxed bg-white/60 backdrop-blur-sm p-5 rounded-2xl border border-rose-100/50 shadow-sm">
+                你將設定一段<span class="font-semibold text-rose-600">觀察期</span>，先不做選擇，只記錄曾經遇過的最好對象。接著，當後面出現比先前記錄更好的對象時，就立刻做出選擇。透過 100 次模擬，观察這個策略的成功率。
+            </div>
+        </header>
+
+        <!-- 主體兩欄式布局 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- 左欄：調整實驗設定 -->
+            <div class="lg:col-span-7 space-y-8">
+                <!-- ================= 二、建立實驗基礎區 ================= -->
+                <section class="glass-card rounded-3xl p-6 border shadow-md space-y-6">
+                    <div class="flex items-center space-x-3 border-b border-rose-100 pb-3">
+                        <div class="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center text-rose-500">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h2 class="text-lg font-bold text-gray-800">1. 調整你的愛情設定</h2>
+                    </div>
+
+                    <!-- 1. 探索者名字 & 實驗次數 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label for="explorerName" class="block text-sm font-semibold text-gray-700">探索者名字</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-rose-400">
+                                    <i class="fa-solid fa-user-astronaut"></i>
+                                </span>
+                                <input type="text" id="explorerName" placeholder="請輸入你的名字" value="尋愛旅人"
+                                    class="w-full pl-10 pr-4 py-2 bg-white/70 border border-rose-200 rounded-xl focus:ring-2 focus:ring-rose-400 focus:border-rose-400 outline-none transition text-gray-700 text-sm">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">實驗次數</label>
+                            <div class="flex items-center justify-between bg-gray-100/70 border border-gray-200 rounded-xl px-4 py-2">
+                                <span class="text-gray-500 text-xs"><i class="fa-solid fa-flask-ripple mr-1"></i>固定模擬</span>
+                                <span class="font-bold text-gray-600 text-sm">100 次</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. 對象總數 & 觀察期百分比 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label for="totalN" class="block text-xs font-semibold text-gray-700">
+                                    對象總數 <span class="italic text-rose-500">n</span>
+                                </label>
+                                <span class="text-[10px] text-gray-400">（5 至 30 人）</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="range" id="totalN" min="5" max="30" value="10" 
+                                    class="w-full accent-rose-500 h-1.5 bg-rose-100 rounded-lg cursor-pointer">
+                                <span id="totalNVal" class="font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-lg border border-rose-100 text-sm min-w-[2.2rem] text-center">10</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center">
+                                <label for="ratioR" class="block text-xs font-semibold text-gray-700">
+                                    觀察期百分比 <span class="italic text-rose-500">r%</span>
+                                </label>
+                                <span class="text-[10px] text-gray-400">（先觀察比例）</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="range" id="ratioR" min="0" max="100" value="30" 
+                                    class="w-full accent-purple-500 h-1.5 bg-purple-100 rounded-lg cursor-pointer">
+                                <span id="ratioRVal" class="font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-lg border border-purple-100 text-sm min-w-[2.5rem] text-center">30%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 即時計算解讀 -->
+                    <div class="bg-gradient-to-br from-rose-50 to-purple-50 rounded-2xl p-4 border border-rose-100 space-y-3 shadow-inner">
+                        <div class="grid grid-cols-2 gap-2 text-center text-sm">
+                            <div class="bg-white/80 p-2.5 rounded-xl border border-rose-100/50">
+                                <span class="block text-xs text-gray-500 font-medium">拒絕觀察人數</span>
+                                <span id="rejectCount" class="text-lg font-extrabold text-rose-600">3</span><span class="text-xs text-rose-500"> 人</span>
+                            </div>
+                            <div class="bg-white/80 p-2.5 rounded-xl border border-rose-100/50">
+                                <span class="block text-xs text-gray-500 font-medium">抉擇起跑點</span>
+                                <span class="text-xs text-purple-500">第 </span><span id="decisionStart" class="text-lg font-extrabold text-purple-600">4</span><span class="text-xs text-purple-500"> 人開始</span>
+                            </div>
+                        </div>
+                        <div class="p-3 bg-white/90 rounded-xl border border-rose-100/30 text-xs text-gray-600 leading-relaxed space-y-2">
+                            <p id="strategyExplanation" class="font-medium text-gray-700"></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- 右欄：啟動實驗按鈕區 -->
+            <div class="lg:col-span-5 flex flex-col justify-between">
+                <!-- ================= 三、啟動模擬區 ================= -->
+                <div class="glass-card rounded-3xl p-6 border shadow-md flex-grow flex flex-col justify-center items-center text-center space-y-6">
+                    <div class="w-16 h-16 rounded-full bg-rose-50 flex items-center justify-center text-rose-500 text-3xl shadow-sm">
+                        <i class="fa-solid fa-heart-circle-check"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-lg font-extrabold text-gray-800">2. 準備好驗證機率了嗎？</h3>
+                        <p class="text-xs text-gray-500 max-w-xs mx-auto">
+                            系統將根據你的設定，瞬間隨機洗牌並進行 100 次完整的模擬決策歷程，為你尋找最佳策略！
+                        </p>
+                    </div>
+
+                    <div class="w-full">
+                        <button id="startExperiment" class="w-full btn-gradient py-4 rounded-2xl text-white font-extrabold text-lg shadow-lg flex items-center justify-center space-x-3 cursor-pointer">
+                            <i class="fa-solid fa-heart-pulse text-xl animate-bounce"></i>
+                            <span>開始 100 次愛情實驗</span>
+                        </button>
+                        <p class="text-center text-[10px] text-gray-400 mt-2">
+                            ※ 每次按下將重新隨機排列卡牌，執行 100 場完整抉擇模擬
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 四、結果總結區 ================= -->
+        <section id="resultSummarySection" class="hidden space-y-6">
+            <div class="glass-card rounded-3xl p-6 sm:p-8 border shadow-lg pulse-card bg-gradient-to-br from-white/95 to-rose-50/95 relative overflow-hidden">
+                <!-- 裝飾背景 -->
+                <div class="absolute -right-10 -bottom-10 text-rose-100/40 text-9xl pointer-events-none">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                
+                <div class="text-center space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-gradient-to-r from-rose-500 to-purple-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow">
+                        <i class="fa-solid fa-trophy"></i>
+                        <span>愛情實驗報告出爐！</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                        <div class="bg-white/80 p-4 rounded-2xl border border-rose-100 shadow-sm flex flex-col justify-center items-center">
+                            <span class="text-xs text-gray-500 font-semibold mb-1">探索家</span>
+                            <span id="summaryExplorer" class="text-base font-bold text-gray-700 truncate max-w-[120px]">尋愛旅人</span>
+                        </div>
+                        <div class="bg-white/80 p-4 rounded-2xl border border-rose-100 shadow-sm flex flex-col justify-center items-center">
+                            <span class="text-xs text-gray-500 font-semibold mb-1">對象總數 (n)</span>
+                            <span id="summaryN" class="text-xl font-black text-gray-700">10 張</span>
+                        </div>
+                        <div class="bg-white/80 p-4 rounded-2xl border border-rose-100 shadow-sm flex flex-col justify-center items-center">
+                            <span class="text-xs text-gray-500 font-semibold mb-1">實驗次數</span>
+                            <span class="text-xl font-black text-gray-700">100 次</span>
+                        </div>
+                        <div class="bg-rose-500/10 p-4 rounded-2xl border border-rose-200 shadow-sm flex flex-col justify-center items-center col-span-1">
+                            <span class="text-xs text-rose-600 font-bold mb-1">成功猜中 A 次數</span>
+                            <span id="summarySuccessCount" class="text-2xl font-black text-rose-600">0 次</span>
+                        </div>
+                        <div class="bg-gradient-to-br from-rose-500 to-purple-600 p-4 rounded-2xl shadow-md flex flex-col justify-center items-center col-span-2 md:col-span-1 text-white">
+                            <span class="text-xs font-bold opacity-90 mb-1">成功命中率</span>
+                            <span id="summaryRate" class="text-3xl font-black tracking-tight">0%</span>
+                        </div>
+                    </div>
+
+                    <div class="max-w-xl mx-auto p-4 bg-purple-50/50 rounded-xl border border-purple-100/50 text-xs sm:text-sm text-purple-950 font-medium">
+                        💡 <strong class="text-purple-700">思考看看：</strong>
+                        調整不同的「觀察期百分比」，命中最完美對象「A」（數值最小者）的成功率會發生什麼變化呢？試著找出能讓成功率最高的神祕百分比吧！
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 五、實驗歷程與數據明細區 ================= -->
+        <section id="resultDetailSection" class="hidden glass-card rounded-3xl p-6 border shadow-md space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-rose-100 pb-4 gap-2">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center text-rose-500">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <h2 class="text-lg font-bold text-gray-800">實驗歷程與數據明細</h2>
+                </div>
+                <!-- 篩選器 -->
+                <div class="flex items-center space-x-2">
+                    <button id="filterAll" class="px-3 py-1 text-xs font-semibold rounded-full bg-rose-500 text-white transition">全部</button>
+                    <button id="filterSuccess" class="px-3 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-600 hover:bg-rose-100 hover:text-rose-600 transition">僅命中 (A)</button>
+                    <button id="filterFail" class="px-3 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-600 hover:bg-purple-100 hover:text-purple-600 transition">未命中</button>
+                </div>
+            </div>
+
+            <!-- 表格區：採用完全響應式佈局 (在行動端自動重組為垂直卡片) -->
+            <div class="overflow-x-auto custom-scrollbar rounded-2xl md:border md:border-rose-50">
+                <table class="w-full text-left border-collapse min-w-full">
+                    <thead class="hidden md:table-header-group bg-gradient-to-r from-rose-50 to-purple-50 border-b border-rose-100">
+                        <tr>
+                            <th class="py-3.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider text-center w-16">場次</th>
+                            <th class="py-3.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider text-center w-20">你的選擇</th>
+                            <th class="py-3.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider text-center w-24">A 的位置</th>
+                            <th class="py-3.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider">決策歷程描述 (觀察與搜尋分區)</th>
+                            <th class="py-3.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider text-center w-24">實驗結果</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailTableBody" class="flex flex-col md:table-row-group gap-4 md:gap-0">
+                        <!-- 資料由 JS 動態注入 -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <p class="text-xs text-gray-400 text-center pt-2">
+                * 註：本策略目標為尋找數值最小（最心動）的對象「A」（1 號牌）。若選到其他人，皆視為未選中 A（未命中）。
+            </p>
+        </section>
+
+        <!-- ================= 頁尾 Footer ================= -->
+        <footer class="mt-12 border-t border-rose-200/50 pt-8 pb-12 text-center space-y-3.5 text-xs text-gray-500 max-w-3xl mx-auto leading-relaxed">
+            <p class="font-semibold text-purple-950">
+                本模擬器由國立臺灣師範大學數學系楊凱琳教授指導，蘇麗敏、羅雅文、賴韻婷共同參與設計與討論。
+            </p>
+            <p class="text-gray-600">
+                內容參考蘇麗敏、羅雅文（2026）〈是他？不是她？〉，收錄於楊凱琳等人（編）《跨領域數學建模之探究與實作：生活、幸福、永恆》。
+            </p>
+            <p class="text-[10px] text-gray-400">
+                本網站部分程式碼使用 Gemini 工具輔助生成，僅供數學建模與機率模擬教學研究使用。
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- ================= 核心 JavaScript 程式 ================= -->
+    <script>
+        // DOM 元素獲取
+        const explorerNameInput = document.getElementById('explorerName');
+        const totalNInput = document.getElementById('totalN');
+        const totalNVal = document.getElementById('totalNVal');
+        const ratioRInput = document.getElementById('ratioR');
+        const ratioRVal = document.getElementById('ratioRVal');
+        
+        const rejectCountSpan = document.getElementById('rejectCount');
+        const decisionStartSpan = document.getElementById('decisionStart');
+        const strategyExplanation = document.getElementById('strategyExplanation');
+        
+        const startBtn = document.getElementById('startExperiment');
+        const resultSummarySection = document.getElementById('resultSummarySection');
+        const resultDetailSection = document.getElementById('resultDetailSection');
+        
+        const summaryExplorer = document.getElementById('summaryExplorer');
+        const summaryN = document.getElementById('summaryN');
+        const summarySuccessCount = document.getElementById('summarySuccessCount');
+        const summaryRate = document.getElementById('summaryRate');
+        
+        const detailTableBody = document.getElementById('detailTableBody');
+        
+        const filterAllBtn = document.getElementById('filterAll');
+        const filterSuccessBtn = document.getElementById('filterSuccess');
+        const filterFailBtn = document.getElementById('filterFail');
+
+        // 全域保存當前模擬數據
+        let simResults = [];
+
+        // 初始化愛心漂浮動畫
+        function initFloatingHearts() {
+            const container = document.getElementById('heartsContainer');
+            const heartCount = 15;
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.width = `${Math.random() * 20 + 10}px`;
+                heart.style.height = heart.style.width;
+                heart.style.animationDelay = `${Math.random() * 15}s`;
+                heart.style.animationDuration = `${Math.random() * 15 + 15}s`;
+                container.appendChild(heart);
+            }
+        }
+
+        // 格式化卡牌顯示 (1 顯示為 A，其餘直接顯示)
+        function formatCardVal(val) {
+            return val === 1 ? 'A' : val;
+        }
+
+        // 即時計算參數
+        function updateParameters() {
+            const n = parseInt(totalNInput.value, 10);
+            const r = parseInt(ratioRInput.value, 10);
+            
+            // 拒絕觀察的人數：[n × r% 後取整數]，利用 Math.floor 處理
+            const k = Math.floor(n * (r / 100));
+            const start = k + 1;
+            
+            // 更新視覺值
+            totalNVal.textContent = n;
+            ratioRVal.textContent = `${r}%`;
+            rejectCountSpan.textContent = k;
+            decisionStartSpan.textContent = start;
+            
+            strategyExplanation.innerHTML = `
+                <div class="space-y-1.5">
+                    <div>
+                        <i class="fa-solid fa-heart-circle-exclamation text-rose-500 mr-1"></i>
+                        當對象總人數為 <span class="font-bold text-rose-600">${n}</span> 人時，你會先拒絕前 <span class="font-bold text-rose-600">${k}</span> 人（只記錄數據），隨後一旦遇見比這前 <span class="font-bold text-rose-600">${k}</span> 人都更好（數值更小）的人，就定終生！
+                    </div>
+                    <div class="text-rose-500 font-semibold border-t border-rose-100 pt-1.5 mt-1.5 bg-rose-50/50 p-2 rounded-lg">
+                        ⚠️ 重要設定：如果直到最後一張牌，都沒有比觀察期更好的對象，根據此策略，你只能被迫選擇最後一張牌。
+                    </div>
+                </div>
+            `;
+            
+            return { n, r, k, start };
+        }
+
+        // 監聽輸入變化
+        totalNInput.addEventListener('input', updateParameters);
+        ratioRInput.addEventListener('input', updateParameters);
+
+        // 生成隨記排列數組 (1 ~ n)
+        function generatePermutation(n) {
+            const arr = Array.from({ length: n }, (_, i) => i + 1);
+            // Fisher-Yates Shuffle
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // 執行 100 次愛情實驗
+        function runSimulation() {
+            const explorerName = explorerNameInput.value.trim() || "尋愛旅人";
+            const { n, k, start } = updateParameters();
+
+            simResults = [];
+            let successCount = 0;
+
+            for (let simIndex = 1; simIndex <= 100; simIndex++) {
+                const list = generatePermutation(n);
+                // 完美對象 A (數值是 1) 在陣列中的位置 (1-based index)
+                const aPosition = list.indexOf(1) + 1; 
+
+                // 1. 觀察前 k 張卡牌，記下最高分數（即數值最小者）
+                let minObserved = Infinity;
+                for (let i = 0; i < k; i++) {
+                    if (list[i] < minObserved) {
+                        minObserved = list[i];
+                    }
+                }
+
+                // 2. 從第 k+1 張卡牌 (index k) 開始搜尋更好的
+                let chosenIndex = -1;
+
+                if (k === 0) {
+                    chosenIndex = 0;
+                } else {
+                    for (let i = k; i < n; i++) {
+                        if (list[i] < minObserved) {
+                            chosenIndex = i;
+                            break;
+                        }
+                    }
+
+                    // 如果後面都沒有更好的，被迫選最後一張
+                    if (chosenIndex === -1) {
+                        chosenIndex = n - 1;
+                    }
+                }
+
+                // 最後選到的那張牌
+                const chosenValue = list[chosenIndex];
+                const chosenPosition = chosenIndex + 1;
+                const isSuccess = (chosenValue === 1); 
+
+                if (isSuccess) {
+                    successCount++;
+                }
+
+                simResults.push({
+                    round: simIndex,
+                    cards: list, 
+                    chosenPosition: chosenPosition,
+                    aPosition: aPosition,
+                    chosenValue: chosenValue,
+                    isSuccess: isSuccess,
+                    minObserved: minObserved, 
+                    k: k
+                });
+            }
+
+            // 更新結果總結介面
+            summaryExplorer.textContent = explorerName;
+            summaryN.textContent = `${n} 張`;
+            summarySuccessCount.textContent = `${successCount} 次`;
+            summaryRate.textContent = `${successCount}%`;
+
+            // 渲染明細表格
+            renderDetailTable('all');
+
+            // 顯示結果與歷程
+            resultSummarySection.classList.remove('hidden');
+            resultDetailSection.classList.remove('hidden');
+
+            // 平滑滾動到結果總結
+            resultSummarySection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 渲染明細表格資料
+        function renderDetailTable(filterType) {
+            detailTableBody.innerHTML = "";
+
+            let filteredResults = simResults;
+            if (filterType === 'success') {
+                filteredResults = simResults.filter(r => r.isSuccess);
+            } else if (filterType === 'fail') {
+                filteredResults = simResults.filter(r => !r.isSuccess);
+            }
+
+            if (filteredResults.length === 0) {
+                detailTableBody.innerHTML = `
+                    <div class="py-8 text-center text-gray-400 text-xs w-full block">
+                        無符合此篩選條件的數據。
+                    </div>
+                `;
+                return;
+            }
+
+            filteredResults.forEach((item) => {
+                const tr = document.createElement('tr');
+                
+                // RWD 混合設計：手機版是獨立精美卡片（flex-col），電腦版則退回標準表格欄（table-row）
+                if (item.isSuccess) {
+                    tr.className = "flex flex-col md:table-row p-4 md:p-0 rounded-2xl md:rounded-none border-2 border-rose-200 md:border-none mb-4 md:mb-0 bg-rose-50/40 hover:bg-rose-100/30 transition-colors shadow-sm md:shadow-none gap-2 md:gap-0";
+                } else {
+                    tr.className = "flex flex-col md:table-row p-4 md:p-0 rounded-2xl md:rounded-none border border-purple-200/50 md:border-none mb-4 md:mb-0 bg-white hover:bg-purple-50/20 transition-colors shadow-sm md:shadow-none gap-2 md:gap-0";
+                }
+
+                // 處理實驗結果標籤
+                const resultBadge = item.isSuccess 
+                    ? `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-100 text-rose-700 border border-rose-200 shrink-0 text-center justify-center">
+                        <i class="fa-solid fa-heart mr-1 text-[9px]"></i> 命中 A
+                       </span>`
+                    : `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-gray-100 text-gray-500 border border-gray-200 shrink-0 text-center justify-center">
+                        未命中
+                       </span>`;
+
+                // 構建精美歷程卡牌鏈 (固定卡牌比例避免非等寬：手機 w-7 h-9，電腦 sm:w-9 sm:h-11)
+                const limitIndex = item.chosenPosition; 
+                let obsCardsHtml = "";
+                let searchCardsHtml = "";
+                
+                for (let idx = 0; idx < limitIndex; idx++) {
+                    const val = item.cards[idx];
+                    const pos = idx + 1;
+                    const isObserved = pos <= item.k;
+                    const isLast = pos === limitIndex; 
+
+                    let cardClass = "";
+
+                    // 全新設計配色：A 永遠為高質感紅色，最終選擇為高質感紫色
+                    if (isObserved) {
+                        // 1. 觀察區卡牌
+                        if (val === 1) {
+                            // 觀察區的 A (驚奇紅色牌)
+                            cardClass = "bg-rose-600 text-white border border-rose-700 font-extrabold shadow-sm";
+                        } else if (val === item.minObserved) {
+                            // 觀察區其餘非 1 的最心動者 (黃底亮眼基準卡)
+                            cardClass = "bg-amber-100 text-amber-800 border border-amber-400 font-extrabold shadow-sm";
+                        } else {
+                            // 觀察區其餘一般牌
+                            cardClass = "bg-slate-100 text-slate-500 border border-slate-200 font-bold";
+                        }
+                        obsCardsHtml += `
+                            <span class="w-7 h-9 sm:w-9 sm:h-11 rounded-lg flex items-center justify-center text-[10px] sm:text-xs shadow-sm shrink-0 ${cardClass}">
+                                ${formatCardVal(val)}
+                            </span>
+                        `;
+                    } else {
+                        // 2. 搜尋區與抉擇卡牌
+                        if (isLast) {
+                            if (val === 1) {
+                                // 最終選擇「且」成功命中 A：深紅色搭配金邊高調呼吸光暈與外環 (無 scale 以免疊加)
+                                cardClass = "bg-rose-600 text-white font-black ring-2 ring-red-500 ring-offset-1 shadow-[0_0_10px_rgba(225,29,72,0.8)]";
+                            } else {
+                                // 最終選擇但「非 A」：顯著的皇家紫色漸層 (無 scale 以免疊加)
+                                cardClass = "bg-gradient-to-br from-purple-600 to-indigo-600 text-white font-black ring-2 ring-purple-400 ring-offset-1 shadow-md";
+                            }
+                        } else {
+                            if (val === 1) {
+                                // 搜尋區但被錯過未選的 A (也是紅色)
+                                cardClass = "bg-rose-600 text-white border border-rose-700 font-bold";
+                            } else {
+                                // 搜尋中掠過的一般卡牌 (淡紫區間背景)
+                                cardClass = "bg-purple-50 text-purple-400 border border-purple-100 font-bold";
+                            }
+                        }
+                        searchCardsHtml += `
+                            <span class="w-7 h-9 sm:w-9 sm:h-11 rounded-lg flex items-center justify-center text-[10px] sm:text-xs shadow-sm shrink-0 transition-transform ${cardClass}">
+                                ${formatCardVal(val)}
+                            </span>
+                        `;
+                    }
+                }
+
+                if (!obsCardsHtml) {
+                    obsCardsHtml = `<span class="text-[10px] text-gray-400 italic px-1 col-span-6 md:col-span-12">無觀察期</span>`;
+                }
+                if (!searchCardsHtml) {
+                    searchCardsHtml = `<span class="text-[10px] text-gray-400 italic px-1 col-span-6 md:col-span-12">無搜尋紀錄</span>`;
+                }
+
+                const chainHtml = `
+                    <div class="flex flex-col gap-2 py-1 w-full">
+                        <!-- 上排：觀察區 Box -->
+                        <div class="flex items-center gap-2.5 bg-slate-50 border border-slate-200/50 px-2.5 py-1.5 rounded-xl w-full md:w-fit">
+                            <span class="text-[9px] sm:text-[10px] font-black text-slate-400 tracking-wider shrink-0 uppercase border-r border-slate-200 pr-2 leading-none">觀察區</span>
+                            <div class="grid grid-cols-5 md:grid-cols-10 gap-1.5 sm:gap-2">
+                                ${obsCardsHtml}
+                            </div>
+                        </div>
+                        
+                        <!-- 下排：搜尋區 Box -->
+                        <div class="flex items-center gap-2.5 bg-purple-50/40 border border-purple-200/30 px-2.5 py-1.5 rounded-xl w-full md:w-fit">
+                            <span class="text-[9px] sm:text-[10px] font-black text-purple-400 tracking-wider shrink-0 uppercase border-r border-purple-200/50 pr-2 leading-none">搜尋區</span>
+                            <div class="grid grid-cols-5 md:grid-cols-10 gap-1.5 sm:gap-2">
+                                ${searchCardsHtml}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // 動態注入 RWD 相容欄位
+                tr.innerHTML = `
+                    <!-- 1. 場次 (手機版融合卡片標頭，右端放結果 Badge) -->
+                    <td class="pb-2 md:py-3 px-0 md:px-2 border-b border-rose-100/50 md:border-none flex md:table-cell justify-between items-center md:text-center">
+                        <span class="md:hidden font-extrabold text-rose-600 text-sm">第 ${item.round} 場</span>
+                        <span class="hidden md:block font-semibold text-gray-600 text-center">${item.round}</span>
+                        <div class="md:hidden">${resultBadge}</div>
+                    </td>
+                    
+                    <!-- 2. 你的選擇 (手機版左右對齊) -->
+                    <td class="py-1 md:py-3 px-0 md:px-2 flex md:table-cell justify-between items-center md:text-center">
+                        <span class="md:hidden text-xs text-gray-500 font-semibold">你的選擇</span>
+                        <span class="inline-flex flex-col items-center leading-tight text-sm font-medium text-gray-700 ${item.isSuccess ? 'text-rose-600 font-bold' : ''}">
+                            <span>第 ${item.chosenPosition} 位</span>
+                            <span class="text-xs mt-0.5">(${formatCardVal(item.chosenValue)})</span>
+                        </span>
+                    </td>
+                    
+                    <!-- 3. A 的位置 (手機版左右對齊) -->
+                    <td class="py-1 md:py-3 px-0 md:px-2 flex md:table-cell justify-between items-center md:text-center">
+                        <span class="md:hidden text-xs text-gray-500 font-semibold">A 的實際位置</span>
+                        <span class="bg-gray-100 px-1.5 py-0.5 rounded border border-gray-200 text-[10px] sm:text-xs text-gray-600">第 ${item.aPosition} 位</span>
+                    </td>
+                    
+                    <!-- 4. 決策歷程描述 (手機版/電腦版均置中排列，自適應拉伸) -->
+                    <td class="py-2 md:py-2 px-0 md:px-3 block md:table-cell">
+                        ${chainHtml}
+                    </td>
+                    
+                    <!-- 5. 實驗結果 (手機版隱藏，因為已在標頭顯示) -->
+                    <td class="hidden md:table-cell py-3 px-2 text-center">
+                        ${resultBadge}
+                    </td>
+                `;
+
+                detailTableBody.appendChild(tr);
+            });
+        }
+
+        // 綁定篩選器按鈕事件
+        function setFilterActive(activeBtn) {
+            const buttons = [filterAllBtn, filterSuccessBtn, filterFailBtn];
+            buttons.forEach(btn => {
+                btn.className = "px-3 py-1 text-xs font-semibold rounded-full bg-gray-100 text-gray-600 hover:bg-rose-100 hover:text-rose-600 transition";
+            });
+            activeBtn.className = "px-3 py-1 text-xs font-semibold rounded-full bg-rose-500 text-white transition shadow";
+        }
+
+        filterAllBtn.addEventListener('click', () => {
+            setFilterActive(filterAllBtn);
+            renderDetailTable('all');
+        });
+
+        filterSuccessBtn.addEventListener('click', () => {
+            setFilterActive(filterSuccessBtn);
+            renderDetailTable('success');
+        });
+
+        filterFailBtn.addEventListener('click', () => {
+            setFilterActive(filterFailBtn);
+            renderDetailTable('fail');
+        });
+
+        // 啟動按鈕點擊事件
+        startBtn.addEventListener('click', () => {
+            const n = parseInt(totalNInput.value, 10);
+            const r = parseInt(ratioRInput.value, 10);
+
+            if (isNaN(n) || n < 5 || n > 30) {
+                alertCustom("親愛的探索者，一生遇到的對象總數必須介於 5 到 30 之間喔！");
+                return;
+            }
+
+            if (isNaN(r) || r < 0 || r > 100) {
+                alertCustom("觀察期的比例必須在 0% 到 100% 之間！");
+                return;
+            }
+
+            runSimulation();
+        });
+
+        // 自訂非阻塞美化提示框
+        function alertCustom(message) {
+            const alertBox = document.createElement('div');
+            alertBox.className = "fixed top-5 left-1/2 transform -translate-x-1/2 z-50 bg-white/95 backdrop-blur-md border border-rose-300 text-rose-700 px-6 py-3.5 rounded-2xl shadow-xl flex items-center space-x-3 transition-all duration-300 opacity-0 -translate-y-4";
+            alertBox.innerHTML = `
+                <i class="fa-solid fa-circle-exclamation text-lg text-rose-500 shrink-0"></i>
+                <span class="font-medium text-sm">${message}</span>
+            `;
+            document.body.appendChild(alertBox);
+            
+            setTimeout(() => {
+                alertBox.classList.remove('opacity-0', '-translate-y-4');
+            }, 10);
+
+            setTimeout(() => {
+                alertBox.classList.add('opacity-0', '-translate-y-4');
+                setTimeout(() => alertBox.remove(), 300);
+            }, 3000);
+        }
+
+        // 初始化執行
+        window.onload = function() {
+            initFloatingHearts();
+            updateParameters();
+        };
+    </script>
+</body>
+</html>
