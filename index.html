@@ -133,7 +133,7 @@
                 「在未知的相遇中，測試你的選擇策略」
             </p>
             <div class="max-w-2xl mx-auto text-gray-600 text-sm sm:text-base leading-relaxed bg-white/60 backdrop-blur-sm p-5 rounded-2xl border border-rose-100/50 shadow-sm">
-                你將設定一段<span class="font-semibold text-rose-600">觀察期</span>，先不做選擇，只記錄曾經遇過的最好對象。接著，當後面出現比先前記錄更好的對象時，就立刻做出選擇。透過 100 次模擬，觀察這個策略的成功率。
+                你將設定一段<span class="font-semibold text-rose-600">經驗期</span>，先不做選擇，只記錄曾經遇過的最好對象。接著，當後面出現比先前記錄更好的對象時，就立刻做出選擇。透過 100 次模擬，觀察這個策略的成功率。
             </div>
         </header>
 
@@ -173,7 +173,7 @@
                         </div>
                     </div>
 
-                    <!-- 2. 對象總數 & 觀察期百分比 -->
+                    <!-- 2. 對象總數 & 經驗期百分比 -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="space-y-2">
                             <div class="flex justify-between items-center">
@@ -192,7 +192,7 @@
                         <div class="space-y-2">
                             <div class="flex justify-between items-center">
                                 <label for="ratioR" class="block text-xs font-semibold text-gray-700">
-                                    觀察期百分比 <span class="italic text-rose-500">r%</span>
+                                    經驗期百分比 <span class="italic text-rose-500">r%</span>
                                 </label>
                                 <span class="text-[10px] text-gray-400">（先觀察比例）</span>
                             </div>
@@ -289,7 +289,7 @@
 
                     <div class="max-w-xl mx-auto p-4 bg-purple-50/50 rounded-xl border border-purple-100/50 text-xs sm:text-sm text-purple-950 font-medium">
                         💡 <strong class="text-purple-700">思考看看：</strong>
-                        調整不同的「觀察期百分比」，命中最完美對象「A」（數值最小者）的成功率會發生什麼變化呢？試著找出能讓成功率最高的神祕百分比吧！
+                        調整不同的「經驗期百分比」，命中最完美對象「A」（數值最小者）的成功率會發生什麼變化呢？試著找出能讓成功率最高的神祕百分比吧！
                     </div>
                 </div>
             </div>
@@ -320,7 +320,7 @@
                             <th class="py-3.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider text-center w-16">場次</th>
                             <th class="py-3.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider text-center w-20">你的選擇</th>
                             <th class="py-3.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider text-center w-24">A 的位置</th>
-                            <th class="py-3.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider">決策歷程描述 (觀察與搜尋分區)</th>
+                            <th class="py-3.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider">決策歷程描述 (經驗與選擇分區)</th>
                             <th class="py-3.5 px-4 text-xs font-bold text-gray-700 uppercase tracking-wider text-center w-24">實驗結果</th>
                         </tr>
                     </thead>
@@ -579,15 +579,15 @@
 
                     // 全新設計配色：A 永遠為高質感紅色，最終選擇為高質感紫色
                     if (isObserved) {
-                        // 1. 觀察區卡牌
+                        // 1. 經驗區卡牌
                         if (val === 1) {
-                            // 觀察區的 A (驚奇紅色牌)
+                            // 經驗區的 A (驚奇紅色牌)
                             cardClass = "bg-rose-600 text-white border border-rose-700 font-extrabold shadow-sm";
                         } else if (val === item.minObserved) {
-                            // 觀察區其餘非 1 的最心動者 (黃底亮眼基準卡)
+                            // 經驗區其餘非 1 的最心動者 (黃底亮眼基準卡)
                             cardClass = "bg-amber-100 text-amber-800 border border-amber-400 font-extrabold shadow-sm";
                         } else {
-                            // 觀察區其餘一般牌
+                            // 經驗區其餘一般牌
                             cardClass = "bg-slate-100 text-slate-500 border border-slate-200 font-bold";
                         }
                         obsCardsHtml += `
@@ -596,7 +596,7 @@
                             </span>
                         `;
                     } else {
-                        // 2. 搜尋區與抉擇卡牌
+                        // 2. 選擇區與抉擇卡牌
                         if (isLast) {
                             if (val === 1) {
                                 // 最終選擇「且」成功命中 A：深紅色搭配金邊高調呼吸光暈與外環 (無 scale 以免疊加)
@@ -607,7 +607,7 @@
                             }
                         } else {
                             if (val === 1) {
-                                // 搜尋區但被錯過未選的 A (也是紅色)
+                                // 選擇區但被錯過未選的 A (也是紅色)
                                 cardClass = "bg-rose-600 text-white border border-rose-700 font-bold";
                             } else {
                                 // 搜尋中掠過的一般卡牌 (淡紫區間背景)
@@ -623,7 +623,7 @@
                 }
 
                 if (!obsCardsHtml) {
-                    obsCardsHtml = `<span class="text-[10px] text-gray-400 italic px-1 col-span-6 md:col-span-12">無觀察期</span>`;
+                    obsCardsHtml = `<span class="text-[10px] text-gray-400 italic px-1 col-span-6 md:col-span-12">無經驗期</span>`;
                 }
                 if (!searchCardsHtml) {
                     searchCardsHtml = `<span class="text-[10px] text-gray-400 italic px-1 col-span-6 md:col-span-12">無搜尋紀錄</span>`;
@@ -631,17 +631,17 @@
 
                 const chainHtml = `
                     <div class="flex flex-col gap-2 py-1 w-full">
-                        <!-- 上排：觀察區 Box -->
+                        <!-- 上排：經驗區 Box -->
                         <div class="flex items-center gap-2.5 bg-slate-50 border border-slate-200/50 px-2.5 py-1.5 rounded-xl w-full md:w-fit">
-                            <span class="text-[9px] sm:text-[10px] font-black text-slate-400 tracking-wider shrink-0 uppercase border-r border-slate-200 pr-2 leading-none">觀察區</span>
+                            <span class="text-[9px] sm:text-[10px] font-black text-slate-400 tracking-wider shrink-0 uppercase border-r border-slate-200 pr-2 leading-none">經驗區</span>
                             <div class="grid grid-cols-5 md:grid-cols-10 gap-1.5 sm:gap-2">
                                 ${obsCardsHtml}
                             </div>
                         </div>
                         
-                        <!-- 下排：搜尋區 Box -->
+                        <!-- 下排：選擇區 Box -->
                         <div class="flex items-center gap-2.5 bg-purple-50/40 border border-purple-200/30 px-2.5 py-1.5 rounded-xl w-full md:w-fit">
-                            <span class="text-[9px] sm:text-[10px] font-black text-purple-400 tracking-wider shrink-0 uppercase border-r border-purple-200/50 pr-2 leading-none">搜尋區</span>
+                            <span class="text-[9px] sm:text-[10px] font-black text-purple-400 tracking-wider shrink-0 uppercase border-r border-purple-200/50 pr-2 leading-none">選擇區</span>
                             <div class="grid grid-cols-5 md:grid-cols-10 gap-1.5 sm:gap-2">
                                 ${searchCardsHtml}
                             </div>
@@ -723,7 +723,7 @@
             }
 
             if (isNaN(r) || r < 0 || r > 100) {
-                alertCustom("觀察期的比例必須在 0% 到 100% 之間！");
+                alertCustom("經驗期的比例必須在 0% 到 100% 之間！");
                 return;
             }
 
