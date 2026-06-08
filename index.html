@@ -591,8 +591,10 @@
                             cardClass = "bg-slate-100 text-slate-500 border border-slate-200 font-bold";
                         }
                         obsCardsHtml += `
-                            <span class="w-7 h-9 sm:w-9 sm:h-11 rounded-lg flex items-center justify-center text-[10px] sm:text-xs shadow-sm shrink-0 ${cardClass}">
+                            <span class="relative overflow-hidden w-7 h-9 sm:w-9 sm:h-11 rounded-lg flex items-center justify-center text-[10px] sm:text-xs shadow-sm shrink-0 ${cardClass}">
                                 ${formatCardVal(val)}
+                        
+                                <span class="absolute w-[140%] h-[2px] bg-rose-500 opacity-80 rotate-[55deg] pointer-events-none"></span>
                             </span>
                         `;
                     } else {
